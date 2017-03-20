@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Loan Amortization Schedule</title>
+	</head>
+	<body style="background-color:lightgrey;font-family:Arial Black">
+	
+	<pre>
+Option Explicit
+
+Sub CalculateAmort()
+
+Dim wb As Workbook
+Dim row_cnt As Integer
+
+Dim loan As Double
+Dim rate As Double
+Dim periods As Integer
+Dim beginning As Integer
+Dim ending As Integer
+
+Set wb = ThisWorkbook
+
+row_cnt = rowCnt("amort_schedule", 1)
+
+wb.Worksheets("amort_schedule").Range(Cells(8, 1), Cells(row_cnt, 5)).ClearContents
+
+loan = wb.Worksheets("amort_schedule").Cells(1, "B").Value
+rate = wb.Worksheets("amort_schedule").Cells(2, "B").Value
+periods = wb.Worksheets("amort_schedule").Cells(3, "B").Value
+beginning = wb.Worksheets("amort_schedule").Cells(4, "B").Value
+ending = wb.Worksheets("amort_schedule").Cells(5, "B").Value
+
+Dim index As Integer
+Dim iIndex As Integer
+Dim jIndex As Integer
+
+If beginning <= 0 Then
+beginning = 1
+End If
+
+If ending <= 0 Then
+ending = periods
+End If
+
+Dim nu As Double
+nu = 1 / (1 + rate)
+nu = Application.WorksheetFunction.Power(nu, periods)
+
+Dim annuity As Double
+annuity = (1 - nu) / (rate)
+
+Dim pmt As Double
+pmt = loan / annuity
+
+Dim balance As Double
+balance = loan
+
+Dim intper As Double
+Dim princper As Double
+
+Dim intperArr() As Double
+ReDim intperArr(periods) As Double
+Dim princperArr() As Double
+ReDim princperArr(periods) As Double
+Dim balanceArr() As Double
+ReDim balanceArr(periods) As Double
+Dim pmtArr() As Double
+ReDim pmtArr(periods) As Double
+Dim periodArr() As Double
+ReDim periodArr(periods) As Double
+
+
+index = 0
+
+Do
+    intper = balance * rate
+    princper = pmt - intper
+    balance = balance - princper
+
+    periodArr(index) = index + 1
+    pmtArr(index) = Round(pmt, 2)
+    intperArr(index) = Round(intper, 2)
+    princperArr(index) = Round(princper, 2)
+    balanceArr(index) = Round(balance, 2)
+    index = index + 1
+
+Loop Until index > periods - 1
+
+iIndex = beginning - 1
+jIndex = 0
+Do
+    wb.Worksheets("amort_schedule").Cells(jIndex + 8, "A") = periodArr(iIndex)
+    wb.Worksheets("amort_schedule").Cells(jIndex + 8, "B") = pmtArr(iIndex)
+    wb.Worksheets("amort_schedule").Cells(jIndex + 8, "C") = intperArr(iIndex)
+    wb.Worksheets("amort_schedule").Cells(jIndex + 8, "D") = princperArr(iIndex)
+    wb.Worksheets("amort_schedule").Cells(jIndex + 8, "E") = balanceArr(iIndex)
+    iIndex = iIndex + 1
+    jIndex = jIndex + 1
+
+Loop Until iIndex > ending - 1
+
+Set wb = Nothing
+
+End Sub
+
+Function rowCnt(sheet_nm As String, col_nbr As Integer)
+
+Dim wb As Workbook
+Dim rng As Range
+
+Set wb = ThisWorkbook
+Set rng = wb.Worksheets(sheet_nm).Range(Cells(Rows.Count, col_nbr), Cells(Rows.Count, col_nbr)).End(xlUp)
+
+rowCnt = rng.Row
+
+Set wb = Nothing
+Set rng = Nothing
+
+End Function
+	</pre>
+	
+	</body>
+</html>

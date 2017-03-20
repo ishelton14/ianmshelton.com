@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Florida Voter Data</title>
+	</head>
+	<body style="background-color:lightgrey;font-family:Arial Black">
+	
+	<pre>
+# Set Current Working Directory
+setwd("C:\\Users\\Ian\\Desktop\\Rplots")
+
+# Next Step: Examine Age 
+
+# Clear Variables
+rm(list=ls())
+
+# Clear Console (equivalent of Ctrl + L)
+cat("\014")
+
+# install.packages('sqldf')
+# install.packages('RODBC')
+# install.packages('scatterplot3d')
+
+# Load Required Packages
+library(RODBC)
+library(sqldf)
+library(scatterplot3d)
+library(RColorBrewer)
+
+# Create Method to Calculate Proportion of Total Voters
+calculateProp <- function(partyNumber){
+  round(partyNumber/totalVoters, 2)
+}
+
+# Use odbcConnect to connect to database
+channel <- odbcConnect("floridaData")
+
+voteNumbers <- sqlQuery(channel,"SELECT Party, COUNT(*)
+                        FROM [floridaData].[dbo].[ALL]
+                        GROUP BY Party")
+
+totalVoters <- sqlQuery(channel, "SELECT COUNT(*)
+                        FROM [floridaData].[dbo].[ALL]")
+
+voteNumbers <- data.frame(as.character(voteNumbers[,1]), voteNumbers[,2])
+
+numberRepublicans <- sum(voteNumbers[,2][voteNumbers[,1]=="REP"])
+numberDemocrats <- sum(voteNumbers[,2][voteNumbers[,1]=="DEM"])
+numberIndependents <- totalVoters-numberRepublicans-numberDemocrats
+
+voterGroups <- c(numberRepublicans, numberDemocrats, numberIndependents)
+floridaData <- sapply(voterGroups, calculateProp)
+floridaData <- as.numeric(floridaData)
+
+png("Florida Voter Plots\\floridaPartyProportions.png")
+xx <- barplot(floridaData, names=c('Republicans',
+                                   'Democrats',
+                                   'Independents'), col=c("Red", "Blue", "Grey"),
+              main="Proportion of Political Parties in Florida", ylab="Proportion",
+              ylim=c(0,.5))
+text(x=xx, y=floridaData, label=floridaData, pos=3)
+dev.off()
+
+republicansByCounty <- sqlQuery(channel, "SELECT County, Party, COUNT(*) AS RepCount
+                                FROM [floridaData].[dbo].[ALL]
+                                WHERE Party='REP'
+                                GROUP BY County, Party")
+
+democratsByCounty <- sqlQuery(channel, "SELECT County, Party, COUNT(*) AS DemCount
+                              FROM [floridaData].[dbo].[ALL]
+                              WHERE Party='DEM'
+                              GROUP BY County, Party")
+
+independentsByCounty <- sqlQuery(channel, "SELECT County, COUNT(*) AS IndCount
+                                 FROM [floridaData].[dbo].[ALL]
+                                 WHERE Party NOT IN
+                                 (SELECT Party
+                                 FROM [floridaData].[dbo].[ALL]
+                                 WHERE Party IN ('REP', 'DEM'))
+                                 GROUP BY County")
+
+countyData <- merge(republicansByCounty, democratsByCounty, by="County")
+countyData <- merge(countyData, independentsByCounty, by="County")
+countyNames <- as.character(countyData$County)
+
+# Create vector totalCount for each county
+totalCount <- countyData$RepCount+countyData$DemCount+countyData$IndCount
+
+# Create vector for proportion in each county
+repPropByCounty <- round(republicansByCounty$RepCount/totalCount, 2)
+demPropByCounty <- round(democratsByCounty$DemCount/totalCount, 2)
+indPropByCounty <- round(independentsByCounty$IndCount/totalCount, 2)
+
+# Create data frame with County Name and Proportion
+propList <- cbind(repPropByCounty,demPropByCounty, indPropByCounty)
+propList <- data.frame(countyNames, propList)
+repList <- propList[,c(1,2)]
+demList <- propList[,c(1,3)]
+indList <- propList[,c(1,4)]
+
+# Format in descending order
+rep.df <- sqldf("SELECT * FROM repList ORDER BY repPropByCounty DESC")
+dem.df <- sqldf("SELECT * FROM demList ORDER BY demPropByCounty DESC")
+ind.df <- sqldf("SELECT * FROM indList ORDER BY indPropByCounty DESC")
+
+# Top 10 Counties with Highest Republican Proportion Barplot
+png("Florida Voter Plots\\propRep.png", width=1000, height=500)
+xx <- barplot(rep.df[1:10,2], names=rep.df[1:10,1], col="Red", main="Top 10 Florida Counties
+              with Highest Proportion of Republican Voters", xlab="County",
+              ylim=c(0,.6))
+text(x=xx, y=rep.df[1:10,2], label=rep.df[1:10,2], pos=3)
+dev.off()
+
+# Top 10 Counties with Highest Democrat Proportion Barplot
+png("Florida Voter Plots\\propDem.png", width=1000, height=500)
+xx <- barplot(dem.df[1:10,2], names=dem.df[1:10,1], col="Blue", main="Top 10 Florida Counties
+              with Highest Proportion of Democrat Voters", xlab="County", ylim=c(0,1))
+text(x=xx, y=dem.df[1:10,2], label=dem.df[1:10,2], pos=3)
+dev.off()
+
+# Top 10 Counties with Highest Independent Proportion Barplot
+png("Florida Voter Plots\\propInd.png", width=1000, height=500)
+xx <- barplot(ind.df[1:10,2], names=ind.df[1:10,1], col="Grey", main="Top 10 Florida Counties
+              with Highest Proportion of Independent Voters", xlab="County", ylim=c(0,.35))
+text(x=xx, y=ind.df[1:10,2], label=ind.df[1:10,2], pos=3)
+dev.off()
+
+# Plot Republican Proportion vs Democrat Proportion
+png("Florida Voter Plots\\repVersusDemPlot.png", width=700, height=700)
+plot(repList[,2], demList[,2], xlab="Proportion of Republican Voters",
+     ylab="Proportion of Democrat Voters", col="Blue",
+     main="Plot of Republican Proportion Versus Democrat Proportion
+     in Each County", pch=16)
+# Republican Proportion as Function of Democrat Proporiton
+repRegression <- lm(repList[,2] ~ demList[,2])
+# Democrat Proportion as Function of Republican Proportion 
+demRegression <- lm(demList[,2] ~ repList[,2])
+abline(demRegression, col="Red")
+dev.off()
+
+# Boxplot for Distribution of Voter Proportions across counties
+png("Florida Voter Plots\\countyProportionDist.png")
+boxplot(repList[,2], demList[,2], indList[,2], 
+        names=c("Republicans", "Democrats", "Independents"), 
+        col=c("Red", "Blue", "Grey"), ylab="Proportion",
+        main="Distribution of County Proportions by Political Party", pch=16)
+dev.off()
+
+# Acquire Propotion of Voters by party and gender
+repFemale <- sqlQuery(channel, "SELECT COUNT(*)
+                      FROM [floridaData].[dbo].[ALL] 
+                      WHERE Party='REP' 
+                      AND Gender='F'; ")
+repMale <- sqlQuery(channel, "SELECT COUNT(*)
+                    FROM [floridaData].[dbo].[ALL] 
+                    WHERE Party='REP' 
+                    AND Gender='M'; ")
+
+demFemale <- sqlQuery(channel, "SELECT COUNT(*)
+                      FROM [floridaData].[dbo].[ALL] 
+                      WHERE Party='DEM' 
+                      AND Gender='F'; ")
+demMale <- sqlQuery(channel, "SELECT COUNT(*)
+                    FROM [floridaData].[dbo].[ALL] 
+                    WHERE Party='DEM' 
+                    AND Gender='M'; ")
+
+totalFemale <- sqlQuery(channel, "SELECT COUNT (*)
+                        FROM [floridaData].[dbo].[ALL]
+                        WHERE Gender='F'; ")
+totalMale <- sqlQuery(channel, "SELECT COUNT (*)
+                      FROM [floridaData].[dbo].[ALL]
+                      WHERE Gender='M'; ")
+
+indFemale <- totalFemale-repFemale-demFemale
+indMale <- totalMale-repMale-demMale
+
+genderParty <- data.frame(c(repFemale, repMale, demFemale, demMale, indFemale, indMale))
+genderParty <- sapply(genderParty, calculateProp)
+genderParty <- as.numeric(genderParty)
+
+genderList <- c("Female", "Male", "Female", "Male", "Female", "Male")
+partyList <- c("Republican", "Republican", "Democrat", "Democrat", 
+               "Independent", "Independent")
+genderParty <- data.frame(genderParty, partyList, genderList)
+
+# Create Grouped Barplot
+# Note: Some records do not have gender data, so proportions add up to .98 and not 1
+testData <- tapply(genderParty[,1], list(genderParty[,2], genderParty[,3]),
+                   mean)
+png("Florida Voter Plots\\groupPropPartyGender.png")
+xx <- barplot(testData, beside=TRUE, col=c("Blue", "Grey", "Red"), 
+              xlab="Gender", ylab="Proportion", ylim=c(0,.25), 
+              main="Proportion of Voters by Gender and Party")
+text(x=xx, y=testData, label=testData, pos=3)
+legend("topright", rownames(testData), fill=c("Blue", "Grey", "Red"))
+dev.off()
+
+# Add Range to Boxplot
+close(channel)
+	</pre>
+	
+	</body>
+</html>
