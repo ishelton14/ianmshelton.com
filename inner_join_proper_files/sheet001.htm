@@ -1,0 +1,576 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:x="urn:schemas-microsoft-com:office:excel"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=Excel.Sheet>
+<meta name=Generator content="Microsoft Excel 15">
+<link id=Main-File rel=Main-File href="../inner_join_proper.htm">
+<link rel=File-List href=filelist.xml>
+<link rel=Stylesheet href=stylesheet.css>
+<style>
+<!--table
+	{mso-displayed-decimal-separator:"\.";
+	mso-displayed-thousand-separator:"\,";}
+@page
+	{margin:.75in .7in .75in .7in;
+	mso-header-margin:.3in;
+	mso-footer-margin:.3in;}
+-->
+</style>
+<![if !supportTabStrip]><script language="JavaScript">
+<!--
+function fnUpdateTabs()
+ {
+  if (parent.window.g_iIEVer>=4) {
+   if (parent.document.readyState=="complete"
+    && parent.frames['frTabs'].document.readyState=="complete")
+   parent.fnSetActiveSheet(0);
+  else
+   window.setTimeout("fnUpdateTabs();",150);
+ }
+}
+
+if (window.name!="frSheet")
+ window.location.replace("../inner_join_proper.htm");
+else
+ fnUpdateTabs();
+//-->
+</script>
+<![endif]>
+</head>
+
+<body link="#0563C1" vlink="#954F72">
+
+<table border=0 cellpadding=0 cellspacing=0 width=824 style='border-collapse:
+ collapse;table-layout:fixed;width:618pt'>
+ <col width=64 span=8 style='width:48pt'>
+ <col width=80 span=2 style='mso-width-source:userset;mso-width-alt:2925;
+ width:60pt'>
+ <col width=84 style='mso-width-source:userset;mso-width-alt:3072;width:63pt'>
+ <col width=68 style='mso-width-source:userset;mso-width-alt:2486;width:51pt'>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl65 colspan=2 width=128 style='height:15.0pt;mso-ignore:
+  colspan;width:96pt'>Production</td>
+  <td class=xl66 width=64 style='width:48pt'>&nbsp;</td>
+  <td class=xl67 width=64 style='width:48pt'>&nbsp;</td>
+  <td class=xl65 width=64 style='width:48pt'>QA</td>
+  <td class=xl66 width=64 style='width:48pt'>&nbsp;</td>
+  <td class=xl66 width=64 style='width:48pt'>&nbsp;</td>
+  <td class=xl67 width=64 style='width:48pt'>&nbsp;</td>
+  <td class=xl66 width=80 style='width:60pt'>&nbsp;</td>
+  <td class=xl66 width=80 style='width:60pt'>&nbsp;</td>
+  <td class=xl66 width=84 style='width:63pt'>&nbsp;</td>
+  <td class=xl66 width=68 style='width:51pt'>&nbsp;</td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl68 style='height:15.0pt'>&nbsp;</td>
+  <td class=xl69>&nbsp;</td>
+  <td class=xl69>&nbsp;</td>
+  <td class=xl70>&nbsp;</td>
+  <td class=xl68>&nbsp;</td>
+  <td class=xl69>&nbsp;</td>
+  <td class=xl69>&nbsp;</td>
+  <td class=xl70>&nbsp;</td>
+  <td class=xl69>&nbsp;</td>
+  <td class=xl69>&nbsp;</td>
+  <td class=xl69>&nbsp;</td>
+  <td class=xl69>&nbsp;</td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl71 style='height:15.0pt'>Date</td>
+  <td class=xl72 style='border-left:none'>Item</td>
+  <td class=xl72 style='border-left:none'>Store</td>
+  <td class=xl73 style='border-left:none'><span
+  style='mso-spacerun:yes'> </span>Sales<span style='mso-spacerun:yes'> </span></td>
+  <td class=xl74 style='border-left:none'>Date</td>
+  <td class=xl74 style='border-left:none'>Item</td>
+  <td class=xl74 style='border-left:none'>Store</td>
+  <td class=xl74 style='border-left:none'>Sales</td>
+  <td class=xl75 style='border-left:none'>Date Equal?</td>
+  <td class=xl75 style='border-left:none'>Item Equal?</td>
+  <td class=xl75 style='border-left:none'>Store Equal?</td>
+  <td class=xl75 style='border-left:none'>All Equal?</td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl76 align=right style='height:15.0pt;border-top:none'>1/1/2017</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>1234</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>123</td>
+  <td class=xl78 style='border-top:none;border-left:none'><span
+  style='mso-spacerun:yes'> </span>$<span style='mso-spacerun:yes'>   
+  </span>50.00 </td>
+  <td class=xl76 align=right style='border-top:none;border-left:none'>1/1/2017</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>1234</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>123</td>
+  <td class=xl78 style='border-top:none;border-left:none'><span
+  style='mso-spacerun:yes'> </span>$<span style='mso-spacerun:yes'>   
+  </span>50.00 </td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>TRUE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>TRUE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>TRUE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none;
+  font-size:11.0pt;color:#006100;font-weight:400;text-decoration:none;
+  text-underline-style:none;text-line-through:none;font-family:Calibri;
+  border:.5pt solid windowtext;background:#C6EFCE;mso-pattern:black none'>TRUE</td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl76 align=right style='height:15.0pt;border-top:none'>1/1/2017</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>1234</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>456</td>
+  <td class=xl78 style='border-top:none;border-left:none'><span
+  style='mso-spacerun:yes'> </span>$<span style='mso-spacerun:yes'> 
+  </span>100.00 </td>
+  <td class=xl76 align=right style='border-top:none;border-left:none'>1/1/2017</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>1234</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>123</td>
+  <td class=xl78 style='border-top:none;border-left:none'><span
+  style='mso-spacerun:yes'> </span>$<span style='mso-spacerun:yes'>   
+  </span>50.00 </td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>TRUE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>TRUE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl76 align=right style='height:15.0pt;border-top:none'>1/1/2017</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>5678</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>123</td>
+  <td class=xl78 style='border-top:none;border-left:none'><span
+  style='mso-spacerun:yes'> </span>$<span style='mso-spacerun:yes'>   
+  </span>25.00 </td>
+  <td class=xl76 align=right style='border-top:none;border-left:none'>1/1/2017</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>1234</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>123</td>
+  <td class=xl78 style='border-top:none;border-left:none'><span
+  style='mso-spacerun:yes'> </span>$<span style='mso-spacerun:yes'>   
+  </span>50.00 </td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>TRUE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>TRUE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl76 align=right style='height:15.0pt;border-top:none'>1/1/2017</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>4455</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>888</td>
+  <td class=xl78 style='border-top:none;border-left:none'><span
+  style='mso-spacerun:yes'> </span>$<span style='mso-spacerun:yes'>   
+  </span>50.00 </td>
+  <td class=xl76 align=right style='border-top:none;border-left:none'>1/1/2017</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>1234</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>123</td>
+  <td class=xl78 style='border-top:none;border-left:none'><span
+  style='mso-spacerun:yes'> </span>$<span style='mso-spacerun:yes'>   
+  </span>50.00 </td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>TRUE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl76 align=right style='height:15.0pt;border-top:none'>1/1/2017</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>5566</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>999</td>
+  <td class=xl78 style='border-top:none;border-left:none'><span
+  style='mso-spacerun:yes'> </span>$<span style='mso-spacerun:yes'>   
+  </span>25.00 </td>
+  <td class=xl76 align=right style='border-top:none;border-left:none'>1/1/2017</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>1234</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>123</td>
+  <td class=xl78 style='border-top:none;border-left:none'><span
+  style='mso-spacerun:yes'> </span>$<span style='mso-spacerun:yes'>   
+  </span>50.00 </td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>TRUE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl76 align=right style='height:15.0pt;border-top:none'>1/1/2017</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>1234</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>123</td>
+  <td class=xl78 style='border-top:none;border-left:none'><span
+  style='mso-spacerun:yes'> </span>$<span style='mso-spacerun:yes'>   
+  </span>50.00 </td>
+  <td class=xl76 align=right style='border-top:none;border-left:none'>1/1/2017</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>1234</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>456</td>
+  <td class=xl78 style='border-top:none;border-left:none'><span
+  style='mso-spacerun:yes'> </span>$<span style='mso-spacerun:yes'> 
+  </span>100.00 </td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>TRUE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>TRUE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl76 align=right style='height:15.0pt;border-top:none'>1/1/2017</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>1234</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>456</td>
+  <td class=xl78 style='border-top:none;border-left:none'><span
+  style='mso-spacerun:yes'> </span>$<span style='mso-spacerun:yes'> 
+  </span>100.00 </td>
+  <td class=xl76 align=right style='border-top:none;border-left:none'>1/1/2017</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>1234</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>456</td>
+  <td class=xl78 style='border-top:none;border-left:none'><span
+  style='mso-spacerun:yes'> </span>$<span style='mso-spacerun:yes'> 
+  </span>100.00 </td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>TRUE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>TRUE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>TRUE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none;
+  font-size:11.0pt;color:#006100;font-weight:400;text-decoration:none;
+  text-underline-style:none;text-line-through:none;font-family:Calibri;
+  border:.5pt solid windowtext;background:#C6EFCE;mso-pattern:black none'>TRUE</td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl76 align=right style='height:15.0pt;border-top:none'>1/1/2017</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>5678</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>123</td>
+  <td class=xl78 style='border-top:none;border-left:none'><span
+  style='mso-spacerun:yes'> </span>$<span style='mso-spacerun:yes'>   
+  </span>25.00 </td>
+  <td class=xl76 align=right style='border-top:none;border-left:none'>1/1/2017</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>1234</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>456</td>
+  <td class=xl78 style='border-top:none;border-left:none'><span
+  style='mso-spacerun:yes'> </span>$<span style='mso-spacerun:yes'> 
+  </span>100.00 </td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>TRUE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl76 align=right style='height:15.0pt;border-top:none'>1/1/2017</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>4455</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>888</td>
+  <td class=xl78 style='border-top:none;border-left:none'><span
+  style='mso-spacerun:yes'> </span>$<span style='mso-spacerun:yes'>   
+  </span>50.00 </td>
+  <td class=xl76 align=right style='border-top:none;border-left:none'>1/1/2017</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>1234</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>456</td>
+  <td class=xl78 style='border-top:none;border-left:none'><span
+  style='mso-spacerun:yes'> </span>$<span style='mso-spacerun:yes'> 
+  </span>100.00 </td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>TRUE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl76 align=right style='height:15.0pt;border-top:none'>1/1/2017</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>5566</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>999</td>
+  <td class=xl78 style='border-top:none;border-left:none'><span
+  style='mso-spacerun:yes'> </span>$<span style='mso-spacerun:yes'>   
+  </span>25.00 </td>
+  <td class=xl76 align=right style='border-top:none;border-left:none'>1/1/2017</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>1234</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>456</td>
+  <td class=xl78 style='border-top:none;border-left:none'><span
+  style='mso-spacerun:yes'> </span>$<span style='mso-spacerun:yes'> 
+  </span>100.00 </td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>TRUE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl76 align=right style='height:15.0pt;border-top:none'>1/1/2017</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>1234</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>123</td>
+  <td class=xl78 style='border-top:none;border-left:none'><span
+  style='mso-spacerun:yes'> </span>$<span style='mso-spacerun:yes'>   
+  </span>50.00 </td>
+  <td class=xl76 align=right style='border-top:none;border-left:none'>1/1/2017</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>5678</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>123</td>
+  <td class=xl78 style='border-top:none;border-left:none'><span
+  style='mso-spacerun:yes'> </span>$<span style='mso-spacerun:yes'>   
+  </span>25.00 </td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>TRUE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>TRUE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl76 align=right style='height:15.0pt;border-top:none'>1/1/2017</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>1234</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>456</td>
+  <td class=xl78 style='border-top:none;border-left:none'><span
+  style='mso-spacerun:yes'> </span>$<span style='mso-spacerun:yes'> 
+  </span>100.00 </td>
+  <td class=xl76 align=right style='border-top:none;border-left:none'>1/1/2017</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>5678</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>123</td>
+  <td class=xl78 style='border-top:none;border-left:none'><span
+  style='mso-spacerun:yes'> </span>$<span style='mso-spacerun:yes'>   
+  </span>25.00 </td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>TRUE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl76 align=right style='height:15.0pt;border-top:none'>1/1/2017</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>5678</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>123</td>
+  <td class=xl78 style='border-top:none;border-left:none'><span
+  style='mso-spacerun:yes'> </span>$<span style='mso-spacerun:yes'>   
+  </span>25.00 </td>
+  <td class=xl76 align=right style='border-top:none;border-left:none'>1/1/2017</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>5678</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>123</td>
+  <td class=xl78 style='border-top:none;border-left:none'><span
+  style='mso-spacerun:yes'> </span>$<span style='mso-spacerun:yes'>   
+  </span>25.00 </td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>TRUE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>TRUE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>TRUE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none;
+  font-size:11.0pt;color:#006100;font-weight:400;text-decoration:none;
+  text-underline-style:none;text-line-through:none;font-family:Calibri;
+  border:.5pt solid windowtext;background:#C6EFCE;mso-pattern:black none'>TRUE</td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl76 align=right style='height:15.0pt;border-top:none'>1/1/2017</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>4455</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>888</td>
+  <td class=xl78 style='border-top:none;border-left:none'><span
+  style='mso-spacerun:yes'> </span>$<span style='mso-spacerun:yes'>   
+  </span>50.00 </td>
+  <td class=xl76 align=right style='border-top:none;border-left:none'>1/1/2017</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>5678</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>123</td>
+  <td class=xl78 style='border-top:none;border-left:none'><span
+  style='mso-spacerun:yes'> </span>$<span style='mso-spacerun:yes'>   
+  </span>25.00 </td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>TRUE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl76 align=right style='height:15.0pt;border-top:none'>1/1/2017</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>5566</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>999</td>
+  <td class=xl78 style='border-top:none;border-left:none'><span
+  style='mso-spacerun:yes'> </span>$<span style='mso-spacerun:yes'>   
+  </span>25.00 </td>
+  <td class=xl76 align=right style='border-top:none;border-left:none'>1/1/2017</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>5678</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>123</td>
+  <td class=xl78 style='border-top:none;border-left:none'><span
+  style='mso-spacerun:yes'> </span>$<span style='mso-spacerun:yes'>   
+  </span>25.00 </td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>TRUE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl76 align=right style='height:15.0pt;border-top:none'>1/1/2017</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>1234</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>123</td>
+  <td class=xl78 style='border-top:none;border-left:none'><span
+  style='mso-spacerun:yes'> </span>$<span style='mso-spacerun:yes'>   
+  </span>50.00 </td>
+  <td class=xl76 align=right style='border-top:none;border-left:none'>1/1/2017</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>4455</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>898</td>
+  <td class=xl78 style='border-top:none;border-left:none'><span
+  style='mso-spacerun:yes'> </span>$<span style='mso-spacerun:yes'>   
+  </span>50.00 </td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>TRUE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl76 align=right style='height:15.0pt;border-top:none'>1/1/2017</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>1234</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>456</td>
+  <td class=xl78 style='border-top:none;border-left:none'><span
+  style='mso-spacerun:yes'> </span>$<span style='mso-spacerun:yes'> 
+  </span>100.00 </td>
+  <td class=xl76 align=right style='border-top:none;border-left:none'>1/1/2017</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>4455</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>898</td>
+  <td class=xl78 style='border-top:none;border-left:none'><span
+  style='mso-spacerun:yes'> </span>$<span style='mso-spacerun:yes'>   
+  </span>50.00 </td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>TRUE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl76 align=right style='height:15.0pt;border-top:none'>1/1/2017</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>5678</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>123</td>
+  <td class=xl78 style='border-top:none;border-left:none'><span
+  style='mso-spacerun:yes'> </span>$<span style='mso-spacerun:yes'>   
+  </span>25.00 </td>
+  <td class=xl76 align=right style='border-top:none;border-left:none'>1/1/2017</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>4455</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>898</td>
+  <td class=xl78 style='border-top:none;border-left:none'><span
+  style='mso-spacerun:yes'> </span>$<span style='mso-spacerun:yes'>   
+  </span>50.00 </td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>TRUE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl76 align=right style='height:15.0pt;border-top:none'>1/1/2017</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>4455</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>888</td>
+  <td class=xl78 style='border-top:none;border-left:none'><span
+  style='mso-spacerun:yes'> </span>$<span style='mso-spacerun:yes'>   
+  </span>50.00 </td>
+  <td class=xl76 align=right style='border-top:none;border-left:none'>1/1/2017</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>4455</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>898</td>
+  <td class=xl78 style='border-top:none;border-left:none'><span
+  style='mso-spacerun:yes'> </span>$<span style='mso-spacerun:yes'>   
+  </span>50.00 </td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>TRUE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>TRUE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl76 align=right style='height:15.0pt;border-top:none'>1/1/2017</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>5566</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>999</td>
+  <td class=xl78 style='border-top:none;border-left:none'><span
+  style='mso-spacerun:yes'> </span>$<span style='mso-spacerun:yes'>   
+  </span>25.00 </td>
+  <td class=xl76 align=right style='border-top:none;border-left:none'>1/1/2017</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>4455</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>898</td>
+  <td class=xl78 style='border-top:none;border-left:none'><span
+  style='mso-spacerun:yes'> </span>$<span style='mso-spacerun:yes'>   
+  </span>50.00 </td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>TRUE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl76 align=right style='height:15.0pt;border-top:none'>1/1/2017</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>1234</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>123</td>
+  <td class=xl78 style='border-top:none;border-left:none'><span
+  style='mso-spacerun:yes'> </span>$<span style='mso-spacerun:yes'>   
+  </span>50.00 </td>
+  <td class=xl76 align=right style='border-top:none;border-left:none'>1/2/2017</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>7788</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>989</td>
+  <td class=xl78 style='border-top:none;border-left:none'><span
+  style='mso-spacerun:yes'> </span>$<span style='mso-spacerun:yes'>   
+  </span>75.00 </td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl76 align=right style='height:15.0pt;border-top:none'>1/1/2017</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>1234</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>456</td>
+  <td class=xl78 style='border-top:none;border-left:none'><span
+  style='mso-spacerun:yes'> </span>$<span style='mso-spacerun:yes'> 
+  </span>100.00 </td>
+  <td class=xl76 align=right style='border-top:none;border-left:none'>1/2/2017</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>7788</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>989</td>
+  <td class=xl78 style='border-top:none;border-left:none'><span
+  style='mso-spacerun:yes'> </span>$<span style='mso-spacerun:yes'>   
+  </span>75.00 </td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl76 align=right style='height:15.0pt;border-top:none'>1/1/2017</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>5678</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>123</td>
+  <td class=xl78 style='border-top:none;border-left:none'><span
+  style='mso-spacerun:yes'> </span>$<span style='mso-spacerun:yes'>   
+  </span>25.00 </td>
+  <td class=xl76 align=right style='border-top:none;border-left:none'>1/2/2017</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>7788</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>989</td>
+  <td class=xl78 style='border-top:none;border-left:none'><span
+  style='mso-spacerun:yes'> </span>$<span style='mso-spacerun:yes'>   
+  </span>75.00 </td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl76 align=right style='height:15.0pt;border-top:none'>1/1/2017</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>4455</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>888</td>
+  <td class=xl78 style='border-top:none;border-left:none'><span
+  style='mso-spacerun:yes'> </span>$<span style='mso-spacerun:yes'>   
+  </span>50.00 </td>
+  <td class=xl76 align=right style='border-top:none;border-left:none'>1/2/2017</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>7788</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>989</td>
+  <td class=xl78 style='border-top:none;border-left:none'><span
+  style='mso-spacerun:yes'> </span>$<span style='mso-spacerun:yes'>   
+  </span>75.00 </td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl76 align=right style='height:15.0pt;border-top:none'>1/1/2017</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>5566</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>999</td>
+  <td class=xl78 style='border-top:none;border-left:none'><span
+  style='mso-spacerun:yes'> </span>$<span style='mso-spacerun:yes'>   
+  </span>25.00 </td>
+  <td class=xl76 align=right style='border-top:none;border-left:none'>1/2/2017</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>7788</td>
+  <td class=xl77 align=right style='border-top:none;border-left:none'>989</td>
+  <td class=xl78 style='border-top:none;border-left:none'><span
+  style='mso-spacerun:yes'> </span>$<span style='mso-spacerun:yes'>   
+  </span>75.00 </td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+  <td class=xl77 align=center style='border-top:none;border-left:none'>FALSE</td>
+ </tr>
+ <![if supportMisalignedColumns]>
+ <tr height=0 style='display:none'>
+  <td width=64 style='width:48pt'></td>
+  <td width=64 style='width:48pt'></td>
+  <td width=64 style='width:48pt'></td>
+  <td width=64 style='width:48pt'></td>
+  <td width=64 style='width:48pt'></td>
+  <td width=64 style='width:48pt'></td>
+  <td width=64 style='width:48pt'></td>
+  <td width=64 style='width:48pt'></td>
+  <td width=80 style='width:60pt'></td>
+  <td width=80 style='width:60pt'></td>
+  <td width=84 style='width:63pt'></td>
+  <td width=68 style='width:51pt'></td>
+ </tr>
+ <![endif]>
+</table>
+
+</body>
+
+</html>

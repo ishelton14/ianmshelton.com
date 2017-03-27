@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Section 2: INNER JOIN Operations - Deriving from Cartesian Product</title>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,300,700" type="text/css">
+    <link rel="stylesheet" href="static/app.css" type="text/css">
+    <meta name="theme-color" content="#111111">
+    <style type="text/css">
+      body {
+        background-color: #ededed !important;
+		background: url('') no-repeat center center;
+        background-size: cover;
+		color: #111 !important;
+		font-size: 12px !important;
+		font-family: Arial, Helvetica, sans-serif;
+		text-align: justify !important;
+      }  
+	  pre {
+        background-color: #ededed !important;
+		background: url('') no-repeat center center;
+        background-size: cover;
+		color: #111 !important;
+		font-size: 12px !important;
+		font-family: Arial, Helvetica, sans-serif;
+		text-align: justify !important;	 
+		white-space: pre-wrap !important;
+		word-wrap:break-word !important;
+		border-collapse: collapse !important;
+		word-break : normal !important;
+		padding-left:1em !important;
+	  }
+	  code {
+        background-color: #ededed !important;
+		background: url('') no-repeat center center;
+        background-size: cover;
+		color: #111!important;
+		font-size: 12px !important;
+		font-family: monospace;
+		text-align: justify !important;	 
+		white-space: pre-wrap !important;
+		word-wrap:break-word !important;  		
+	  }	  
+      header {
+        background-color: #ededed !important;
+		color: #111 !important;
+		font-size: 15px !important;
+		text-align: justify !important;
+		padding-left:1em !important;
+      }
+	  .key_word {
+        background-color: #ededed !important;
+		background: url('') no-repeat center center;
+        background-size: cover;
+		color: #111;
+		font-size: 11px !important;
+		font-family: monospace;
+		text-align: justify !important;	 
+		white-space: pre-wrap !important;
+		word-wrap:break-word !important;
+		border-collapse: collapse !important;
+		word-break : normal !important; 	  
+	  }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1 style = "font-size:20px;">Section 2: INNER JOIN Operations - Deriving from Cartesian Product</h1>
+	</header>
+		<pre>
+In this exercise, I will be using two tables that have the same fields: Date, Item Number, Store Number, and Sales. The primary key of these tables is the composite key of Date, Item Number, and Store Number. For this example, assume the first table is a Production table and the second table is a QA table. As a Business Intelligence Analyst, this is a common exercise we undergo when making changes to various tables (for example, if the source system changes, joining the Production and QA tables ensures that the tables match record by record). The SQL query to create the two tables and populate them with data used in the examples that follow is shown below:
+		<code class="prettyprint">
+create database test;
+
+drop table test.prod;
+drop table test.qa;
+
+create table test.prod (
+dt date
+,item_nbr int
+,store_nbr int
+,sales int
+)
+;
+
+insert into test.prod (dt, item_nbr, store_nbr, sales)
+values 
+('2017-01-01', 1234, 123, 50)
+,('2017-01-01', 1234, 456, 100)
+,('2017-01-01', 5678, 123, 25)
+,('2017-01-01', 4455, 888, 50)
+,('2017-01-01', 5566, 999, 25)
+;
+
+create table test.qa (
+dt date
+,item_nbr int
+,store_nbr int
+,sales int
+)
+;
+
+insert into test.qa (dt, item_nbr, store_nbr, sales)
+values 
+('2017-01-01', 1234, 123, 50)
+,('2017-01-01', 1234, 456, 100)
+,('2017-01-01', 5678, 123, 25)
+,('2017-01-01', 4455, 898, 50)
+,('2017-01-02', 7788, 989, 75)
+;		
+		</code>
+I will start by going over an <span class="key_word">INNER JOIN</span> operation in which all three fields are joined together. I will then go through one scenario in which only two fields are joined together and another scenario in which only one field is joined together. There may be use cases for not joining on all three fields, but it is important to understand how one can retrieve misleading and inaccurate results by not properly joining tables. The number of rows returned by a Cartesian Product will equal the number of records in the first table multiplied by the number of records in the second table. In this example, both tables have 5 records, so the Cartesian product will return 25 records. You can generate the Cartesian Product in two ways:
+		<code class="prettyprint">
+select *
+from test.prod, test.qa
+;
+
+select *
+from test.prod
+cross join test.qa
+;		
+		</code>
+Joining on all 3 fields (Proper Join)
+
+You can think of this example by creating four new columns to the right of the Cartesian Results: one indicating if the Date column is equal, one indicating if the Item Number column is equal, one indicating if the Store Number column is equal, and one column indicating if all three columns are equal. If all three columns are equal, those rows will be returned in the INNER JOIN result sets. The Cartesian Product and Result Set are shown below:
+
+<img src="inner_join_proper.png" alt="img"/>	
+		</pre>
+		<script type="text/javascript" src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js">		
+		</script>
+  </body>
+</html>

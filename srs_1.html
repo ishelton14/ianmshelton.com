@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Section 1: Intro</title>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,300,700" type="text/css">
+    <link rel="stylesheet" href="static/app.css" type="text/css">
+    <meta name="theme-color" content="#111111">
+    <style type="text/css">
+      body {
+        background-color: #ededed !important;
+		background: url('') no-repeat center center;
+        background-size: cover;
+		color: #111 !important;
+		font-size: 12px !important;
+		font-family: Arial, Helvetica, sans-serif;
+		text-align: justify !important;
+      }  
+	  pre {
+        background-color: #ededed !important;
+		background: url('') no-repeat center center;
+        background-size: cover;
+		color: #111 !important;
+		font-size: 13px !important;
+		font-family: Arial, Helvetica, sans-serif;
+		text-align: justify !important;	 
+		white-space: pre-wrap !important;
+		word-wrap:break-word !important;
+		border-collapse: collapse !important;
+		word-break : normal !important;
+		padding-left:1em !important;
+	  }
+	  code {
+        background-color: #ededed !important;
+		background: url('') no-repeat center center;
+        background-size: cover;
+		color: #111!important;
+		font-size: 12px !important;
+		font-family: monospace;
+		text-align: justify !important;	 
+		white-space: pre-wrap !important;
+		word-wrap:break-word !important; 		
+	  }	  
+      header {
+        background-color: #ededed !important;
+		color: #111 !important;
+		font-size: 15px !important;
+		text-align: justify !important;
+		padding-left:1em !important;
+      }
+	  .key_word {
+        background-color: #ededed !important;
+		background: url('') no-repeat center center;
+        background-size: cover;
+		color: #111 !important;
+		font-size: 13px !important;
+		font-family: monospace;
+		text-align: justify !important;	 
+		white-space: pre-wrap !important;
+		word-wrap:break-word !important;
+		border-collapse: collapse !important;
+		word-break : normal !important; 	  
+	  }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1 style = "font-size:20px;">Section 1: Intro</h1>
+	</header>
+		<pre>
+Most SQL users intuitively understand the results of an <span class="key_word">INNER JOIN</span>, a <span class="key_word">LEFT OUTER JOIN</span>, and a <span class="key_word">FULL OUTER JOIN</span>, especially when joining on just one field. However, understanding the result sets when joining on multiple fields or when not using Equi Joins becomes more complicated. I believe it is useful to understand logically why an RDBMS returns the results that it does. It is important to note that this post is NOT an attempt to explain the execution plan of the RDBMS, but rather to explain logically why result sets are returned.
+		
+In this post, I will explain the following concepts through examples: 
+
+1) The results of any <span class="key_word">INNER JOIN</span> operation can be understood by examining the Cartesian product
+
+2) The results of any <span class="key_word">LEFT OUTER JOIN</span> operation can be derived by the following:
+<code>
+Results of INNER JOIN operation		
+UNION		
+Records in Left table NOT in INNER JOIN results 
+</code>
+3) The results of any <span class="key_word">RIGHT OUTER JOIN</span> operation can be derived by the following:
+<code>
+Results of INNER JOIN operation		
+UNION		
+Records in Right table NOT in INNER JOIN results 		
+</code>
+4) The results of any <span class="key_word">FULL OUTER JOIN</span> operation can be derived by the following:
+<code>
+Results of INNER JOIN operation		
+UNION
+Records in Left table NOT in INNER JOIN results 
+UNION
+Records in Right table NOT in INNER JOIN results
+</code>
+		</pre>
+		<script type="text/javascript" src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js">		
+		</script>
+  </body>
+</html>
