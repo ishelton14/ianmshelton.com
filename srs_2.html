@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Section 2: INNER JOIN Operations - Deriving from the Cartesian Product</title>
+    <title>Section 2: Inner Join Operations - Deriving from the Cartesian Product</title>
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,300,700" type="text/css">
     <link rel="stylesheet" href="static/app.css" type="text/css">
@@ -16,7 +16,7 @@
 		background: url('') no-repeat center center;
         background-size: cover;
 		color: #111 !important;
-		font-size: 12px !important;
+		font-size: 13px !important;
 		font-family: Arial, Helvetica, sans-serif;
 		text-align: justify !important;
       }  
@@ -25,7 +25,7 @@
 		background: url('') no-repeat center center;
         background-size: cover;
 		color: #111 !important;
-		font-size: 12px !important;
+		font-size: 14px !important;
 		font-family: Arial, Helvetica, sans-serif;
 		text-align: justify !important;	 
 		white-space: pre-wrap !important;
@@ -57,7 +57,7 @@
 		background: url('') no-repeat center center;
         background-size: cover;
 		color: #111;
-		font-size: 11px !important;
+		font-size: 13px !important;
 		font-family: monospace;
 		text-align: justify !important;	 
 		white-space: pre-wrap !important;
@@ -69,7 +69,7 @@
   </head>
   <body>
     <header>
-      <h1 style = "font-size:20px;">Section 2: INNER JOIN Operations - Deriving from the Cartesian Product</h1>
+      <h1 style = "font-size:20px;">Section 2: Inner Join Operations - Deriving from the Cartesian Product</h1>
 	</header>
 		<pre>
 In this exercise, I will be using two tables that have the same fields: Date, Item Number, Store Number, and Sales. The primary key of these tables is the composite key of Date, Item Number, and Store Number. For this example, assume the first table is a Production table and the second table is a QA table. As a Business Intelligence Analyst, this is a common exercise we undergo when making changes to various tables (for example, if the source system changes, joining the Production and QA tables ensures that the tables match record by record). The SQL query to create the two tables and populate them with data used in the examples that follow is shown below:
@@ -124,11 +124,55 @@ from test.prod
 cross join test.qa
 ;		
 		</code>
-Joining on all 3 fields (Proper Join)
+<u>Joining on All 3 Fields</u>
 
-You can think of this example by creating four new columns to the right of the Cartesian Results: one indicating if the Date column is equal, one indicating if the Item Number column is equal, one indicating if the Store Number column is equal, and one column indicating if all three columns are equal. If all three columns are equal, those rows will be returned in the INNER JOIN result sets. The Cartesian Product and Result Set are shown below:
+You can think of this example by creating four new columns to the right of the Cartesian Results: one indicating if the Date column is equal, one indicating if the Item Number column is equal, one indicating if the Store Number column is equal, and one column indicating if all three columns are equal. If all three columns are equal, those rows will be returned in the Inner Join result sets. The Cartesian Product and Result Set are shown below:
+	<code class="prettyprint">
+select *
+from test.prod
+inner join test.qa
+	on test.prod.dt = test.qa.dt
+	and test.prod.item_nbr = test.qa.item_nbr
+	and test.prod.store_nbr = test.qa.store_nbr
+;	
+	</code>
+<img src="inner_join_proper.png" alt="img"/>
 
-<img src="inner_join_proper.png" alt="img"/>	
+<img src="inner_join_proper_results.png" alt="img"/>
+
+<u>Joining on Only 2 Fields</u>
+
+When joining on only two fields, we will still start with the Cartesian Product results, but we will create just three new columns to the right: one indicating if the Date column is equal, one indicating if the Item Number column is equal, and one column indicating if the two columns are equal. The Cartesian Product and Result Set are shown below:
+	<code class="prettyprint">
+select *
+from test.prod
+inner join test.qa
+	on test.prod.dt = test.qa.dt
+	and test.prod.item_nbr = test.qa.item_nbr        
+; 	
+	</code>	
+<img src="inner_join_two.png" alt="img"/>
+
+<img src="inner_join_two_results.png" alt="img"/>
+
+The important thing to note about the result set of this query is that since Item Number 1234 appears twice in both tables, there are 4 records returned in the Inner Join result set instead of 2 records. If you were conducting analysis to sum the sales fields, you would get misleading and meaningless results. 
+
+<u>Joining on Only 1 Field</u>
+
+When joining on just one field, we will still start with the Cartesian Product results, but we will create just one new column to the right: a column indicating if the Date column is equal. The Cartesian Product and Result Set are shown below:
+	<code class="prettyprint">
+select *
+from test.prod
+inner join test.qa
+		on test.prod.dt = test.qa.dt
+;    	
+	</code>
+<img src="inner_join_one.png" alt="img"/>
+
+<img src="inner_join_one_results.png" alt="img"/>
+
+As in the example with joining two fields, the results of this join are logically meaningless. When you evaluate the Date Equal condition, the condition is true 20 out of 25 times. Thus, 20 rows are returned.
+	
 		</pre>
 		<script type="text/javascript" src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js">		
 		</script>
