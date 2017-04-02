@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Section 1: Intro</title>
+    <title>Section 1: Join Concepts</title>
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,300,700" type="text/css">
     <link rel="stylesheet" href="static/app.css" type="text/css">
@@ -67,11 +67,33 @@
 		border-collapse: collapse !important;
 		word-break : normal !important; 	  
 	  }
+	  a {
+	   font-size:30px;
+	   color: #e5e5e5;
+	  }
+	div#banner { 
+	   position: absolute; 
+	   top: 0; 
+	   left: 0; 
+	   background-color: #111;
+	   color: #e5e5e5;	   
+	   width: 100%;
+	   text-align: left
+	   margin: 0 auto; 
+	   padding: 14px; 
+	   border: 1px solid #000;
+	   font-size:25px;
+	   position: fixed; 
+	 }
     </style>
   </head>
   <body>
     <header>
-      <h1 style = "font-size:20px;">Section 1: Intro</h1>
+	  <div id="banner">
+		<a href="blog.html">Blog - Ian Shelton</a>
+	  </div>
+	<br><br><br>
+    <h1 style = "font-size:20px;">Section 1: Join Concepts</h1>
 	</header>
 		<pre>
 Most SQL users intuitively understand the results of an <span class="key_word">INNER JOIN</span>, a <span class="key_word">LEFT OUTER JOIN</span>, and a <span class="key_word">FULL OUTER JOIN</span>, especially when joining on just one field. However, understanding the result sets when joining on multiple fields or when not using Equi Joins becomes more complicated. I believe it is useful to understand logically why an RDBMS returns the results that it does. It is important to note that this post is NOT an attempt to explain the execution plan of the RDBMS, but rather to explain logically why result sets are returned.
@@ -99,7 +121,7 @@ Records in Left table NOT in INNER JOIN results
 UNION
 Records in Right table NOT in INNER JOIN results
 </code>
-<h2 style = "font-size:20px; font-weight: bold; text-align: center"><a href="srs_2.html">Next</a></h2>
+<h2 style = "font-size:20px; font-weight: bold; text-align: center;"><a style = "color: #111" href="srs_2.html">Next</a></h2>
 		</pre>
 		<script type="text/javascript" src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js">		
 		</script>

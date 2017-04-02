@@ -67,10 +67,32 @@
 		border-collapse: collapse !important;
 		word-break : normal !important; 	  
 	  }
+	  a {
+	   font-size:30px;
+	   color: #e5e5e5;
+	  }
+	div#banner { 
+	   position: absolute; 
+	   top: 0; 
+	   left: 0; 
+	   background-color: #111;
+	   color: #e5e5e5;	   
+	   width: 100%;
+	   text-align: left
+	   margin: 0 auto; 
+	   padding: 14px; 
+	   border: 1px solid #000;
+	   font-size:25px;
+	   position: fixed; 
+	 }
     </style>
   </head>
   <body>
     <header>
+	  <div id="banner">
+		<a href = 'blog.html'>Blog - Ian Shelton</a>
+	  </div>
+	<br><br><br>
 	  <h1 style = "font-size:22px; font-weight: bold">Section 4: Right & Left Joins - Deriving from Inner Join Operations</h1>
 	</header>
 		<pre>
@@ -123,7 +145,7 @@ left join test.qa
 </code>
 
 <img src="left_join_one_results.png" alt="img"/>
-<h2 style = "font-size:20px; font-weight: bold; text-align: center"><a href="srs_3.html">Previous</a><a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a><a href="srs_5.html">Next</a></h2>
+<h2 style = "font-size:20px; font-weight: bold; text-align: center"><a style = "color: #111" href="srs_3.html">Previous</a><a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style = "color: #111" href="srs_5.html">Next</a></h2>
 		</pre>
 		<script type="text/javascript" src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js">		
 		</script>
