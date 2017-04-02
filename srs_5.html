@@ -107,6 +107,7 @@ Records in Right table NOT in INNER JOIN results
 Please note that the examples I use come from MySQL, which does not support <span class="key_word">FULL OUTER JOINs</span>. Instead, I will emulate a <span class="key_word">FULL OUTER JOIN</span> by doing a <span class="key_word">UNION</span> of a <span class="key_word">LEFT OUTER JOIN</span> and a <span class="key_word">RIGHT OUTER JOIN</span>. Using a <span class="key_word">UNION</span> instead of a <span class="key_word">UNION ALL</span> will remove duplicates, which will reflect what a <span class="key_word">FULL OUTER JOIN</span> will return. 
 
 <u>Joining on All 3 Fields</u>
+
 Since there are two records in the Left Table and two records in the Right Table that are not in the <span class="key_word">INNER JOIN</span> result set, the <span class="key_word">FULL OUTER JOIN</span> will return the following:
 <code class="prettyprint">
 select *
@@ -162,6 +163,7 @@ right join test.qa
 	on test.prod.dt = test.qa.dt
 ;
 </code>
+
 <img src="full_join_one_results.png" alt="img"/>
 		<h2 style = "font-size:20px; font-weight: bold; text-align: center"><a style = "color: #111" href="srs_4.html">Previous</a></h2>
 		</pre>

@@ -99,6 +99,7 @@
 Most SQL users intuitively understand the results of an <span class="key_word">INNER JOIN</span>, a <span class="key_word">LEFT OUTER JOIN</span>, and a <span class="key_word">FULL OUTER JOIN</span>, especially when joining on just one field. However, understanding the result sets when joining on multiple fields or when not using Equi Joins becomes more complicated. I believe it is useful to understand logically why an RDBMS returns the results that it does. It is important to note that this post is NOT an attempt to explain the execution plan of the RDBMS, but rather to explain logically why result sets are returned.
 		
 In this post, I will explain the following concepts through examples: 
+
 1) The results of any <span class="key_word">INNER JOIN</span> operation can be understood by examining the Cartesian product
 
 2) The results of any <span class="key_word">LEFT OUTER JOIN</span> operation can be derived by the following:
