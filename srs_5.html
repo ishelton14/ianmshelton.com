@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Section 5: Full Join Operations: Deriving from Inner, Right, & Left Join Operations</title>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,300,700" type="text/css">
+    <link rel="stylesheet" href="static/app.css" type="text/css">
+    <meta name="theme-color" content="#111111">
+    <style type="text/css">
+      body {
+        background-color: #ededed !important;
+        background-size: cover;
+		color: #111 !important;
+		font-size: 13px !important;
+		font-family: Arial, Helvetica, sans-serif;
+		text-align: justify !important;
+      }  
+	  pre {
+        background-color: #ededed !important;
+        background-size: cover;
+		border-style: none;
+		color: #111 !important;
+		font-size: 15px !important;
+		font-family: Arial, Helvetica, sans-serif;
+		text-align: justify !important;	 
+		white-space: pre-wrap !important;
+		word-wrap:break-word !important;
+		border-collapse: collapse !important;
+		word-break : normal !important;
+		padding-left:14em !important;
+		padding-right:14em !important;
+	  }
+	  code {
+        background-color: #ededed !important;
+		background: url('') no-repeat center center;
+        background-size: cover;
+		color: #111!important;
+		font-size: 13px !important;
+		font-family: monospace;
+		text-align: justify !important;	 
+		white-space: pre-wrap !important;
+		word-wrap:break-word !important;  		
+	  }	  
+      header {
+        background-color: #ededed !important;
+		color: #111 !important;
+		font-size: 15px !important;
+		font-weight: bold
+		text-align: justify !important;
+		padding-left:14em;
+		padding-right:10em;
+      }
+	  .key_word {
+        background-color: #ededed !important;
+		background: url('') no-repeat center center;
+        background-size: cover;
+		color: #111;
+		font-size: 15px !important;
+		font-family: monospace;
+		text-align: justify !important;	 
+		white-space: pre-wrap !important;
+		word-wrap:break-word !important;
+		border-collapse: collapse !important;
+		word-break : normal !important; 	  
+	  }
+    </style>
+  </head>
+  <body>
+    <header>
+	  <h1 style = "font-size:22px; font-weight: bold">Section 5: Full Join Operations: Deriving from Inner, Right, & Left Join Operations</h1>
+	</header>
+		<pre>
+In this section, we will go over the same three examples we went over in the Inner, Right, & Left Join sections. As mentioned at the beginning of this post, the results of any <span class="key_word">FULL OUTER JOIN</span> operation can be derived by the following:
+<code>
+Results of INNER JOIN operation		
+UNION
+Records in Left table NOT in INNER JOIN results 
+UNION
+Records in Right table NOT in INNER JOIN results
+</code>
+Please note that the examples I use come from MySQL, which does not support <span class="key_word">FULL OUTER JOINs</span>. Instead, I will emulate a <span class="key_word">FULL OUTER JOIN</span> by doing a <span class="key_word">UNION</span> of a <span class="key_word">LEFT OUTER JOIN</span> and a <span class="key_word">RIGHT OUTER JOIN</span>. Using a <span class="key_word">UNION</span> instead of a <span class="key_word">UNION ALL</span> will remove duplicates, which will reflect what a <span class="key_word">FULL OUTER JOIN</span> will return. 
+
+<u>Joining on All 3 Fields</u>
+Since there are two records in the Left Table and two records in the Right Table that are not in the <span class="key_word">INNER JOIN</span> result set, the <span class="key_word">FULL OUTER JOIN</span> will return the following:
+<code class="prettyprint">
+select *
+from test.prod
+left join test.qa
+	on test.prod.dt = test.qa.dt
+	and test.prod.item_nbr = test.qa.item_nbr
+	and test.prod.store_nbr = test.qa.store_nbr
+union        
+select *
+from test.prod
+right join test.qa
+	on test.prod.dt = test.qa.dt
+	and test.prod.item_nbr = test.qa.item_nbr
+	and test.prod.store_nbr = test.qa.store_nbr        
+; 
+</code>
+
+<img src="full_join_proper_results.png" alt="img"/>
+
+<u>Joining on Only 2 Fields</u>
+
+Since there is one record in the Left Table and one record in the Right Table that are not in the <span class="key_word">INNER JOIN</span> result set, the <span class="key_word">FULL OUTER JOIN</span> will return the following:
+<code class="prettyprint">
+select *
+from test.prod
+left join test.qa
+	on test.prod.dt = test.qa.dt
+	and test.prod.item_nbr = test.qa.item_nbr
+union
+select *
+from test.prod
+right join test.qa
+	on test.prod.dt = test.qa.dt
+	and test.prod.item_nbr = test.qa.item_nbr
+;   
+</code>
+
+<img src="full_join_two_results.png" alt="img"/>
+
+<u>Joining on Only 1 Field</u>
+ 
+The only record in either the Left Table or the Right Table that is not in the <span class="key_word">INNER JOIN</span> result set is the last record in the Right Table. This occurs because the value of the Date field in the last record in the Right Table does not match any value in the Left Table. Thus, the <span class="key_word">FULL OUTER JOIN</span> result set produces the following:
+<code class="prettyprint">
+select *
+from test.prod
+left join test.qa
+	on test.prod.dt = test.qa.dt
+union        
+select *
+from test.prod
+right join test.qa
+	on test.prod.dt = test.qa.dt
+;
+</code>
+<img src="full_join_one_results.png" alt="img"/>
+		<h2 style = "font-size:20px; font-weight: bold; text-align: center"><a href="srs_4.html">Previous</a></h2>
+		</pre>
+		<script type="text/javascript" src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js">		
+		</script>
+  </body>
+</html>

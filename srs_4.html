@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Section 1: Intro</title>
+    <title>Section 4: Right & Left Joins - Deriving from Inner Join Operations</title>
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,300,700" type="text/css">
     <link rel="stylesheet" href="static/app.css" type="text/css">
@@ -71,36 +71,59 @@
   </head>
   <body>
     <header>
-      <h1 style = "font-size:20px;">Section 1: Intro</h1>
+	  <h1 style = "font-size:22px; font-weight: bold">Section 4: Right & Left Joins - Deriving from Inner Join Operations</h1>
 	</header>
 		<pre>
-Most SQL users intuitively understand the results of an <span class="key_word">INNER JOIN</span>, a <span class="key_word">LEFT OUTER JOIN</span>, and a <span class="key_word">FULL OUTER JOIN</span>, especially when joining on just one field. However, understanding the result sets when joining on multiple fields or when not using Equi Joins becomes more complicated. I believe it is useful to understand logically why an RDBMS returns the results that it does. It is important to note that this post is NOT an attempt to explain the execution plan of the RDBMS, but rather to explain logically why result sets are returned.
-		
-In this post, I will explain the following concepts through examples: 
-
-1) The results of any <span class="key_word">INNER JOIN</span> operation can be understood by examining the Cartesian product
-
-2) The results of any <span class="key_word">LEFT OUTER JOIN</span> operation can be derived by the following:
+In this section, we will go through the same examples from the 'Inner Join Operations: Deriving from Cartesian Product' section except that we will perform <span class="key_word">LEFT OUTER JOINs</span> instead of <span class="key_word">INNER JOINs</span>. As mentioned at the beginning of the post, the results of any <span class="key_word">LEFT OUTER JOIN</span> operation can be derived by the following:
 <code>
 Results of INNER JOIN operation		
 UNION		
 Records in Left table NOT in INNER JOIN results 
 </code>
-3) The results of any <span class="key_word">RIGHT OUTER JOIN</span> operation can be derived by the following:
-<code>
-Results of INNER JOIN operation		
-UNION		
-Records in Right table NOT in INNER JOIN results 		
+<u>Joining on All 3 Fields</u>
+
+Since there are two records in the Left Table (the Production Table) that are NOT in the INNER JOIN result set, the LEFT JOIN operations returns the following: 
+<code class="prettyprint">
+select *
+from test.prod
+left join test.qa
+	on test.prod.dt = test.qa.dt
+	and test.prod.item_nbr = test.qa.item_nbr
+	and test.prod.store_nbr = test.qa.store_nbr       
+;
 </code>
-4) The results of any <span class="key_word">FULL OUTER JOIN</span> operation can be derived by the following:
-<code>
-Results of INNER JOIN operation		
-UNION
-Records in Left table NOT in INNER JOIN results 
-UNION
-Records in Right table NOT in INNER JOIN results
+
+<img src="left_join_proper_results.png" alt="img"/>
+
+Note that for the rows unique to the Left Table, the corresponding columns in the Right Table are assigned NULL values. 
+
+<u>Joining on Only 2 Fields</u>
+
+Since there is one record in the Left Table (the Production Table) that is NOT in the INNER JOIN result set, the LEFT JOIN operations returns the following:
+<code class="prettyprint">
+select *
+from test.prod
+left join test.qa
+	on test.prod.dt = test.qa.dt
+	and test.prod.item_nbr = test.qa.item_nbr     
+;  
 </code>
-<h2 style = "font-size:20px; font-weight: bold; text-align: center"><a href="srs_2.html">Next</a></h2>
+
+<img src="left_join_two_results.png" alt="img"/>
+
+<u>Joining on Only 1 Field</u> 
+
+Since all of the records in the Left Table are present in the INNER JOIN result set, the LEFT JOIN operation produces the same result set as the INNER JOIN operation: 
+<code class="prettyprint">
+select *
+from test.prod
+left join test.qa
+	on test.prod.dt = test.qa.dt
+;      
+</code>
+
+<img src="left_join_one_results.png" alt="img"/>
+<h2 style = "font-size:20px; font-weight: bold; text-align: center"><a href="srs_3.html">Previous</a><a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a><a href="srs_5.html">Next</a></h2>
 		</pre>
 		<script type="text/javascript" src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js">		
 		</script>
