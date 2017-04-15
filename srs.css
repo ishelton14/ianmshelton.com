@@ -15,7 +15,7 @@
 		font-family: Arial, Helvetica, sans-serif;
 		/* text-align: justify !important;	  */
 		white-space: pre-wrap !important;
-		word-wrap:break-word !important;
+		/* word-wrap:break-word !important; */
 		border-collapse: collapse !important;
 		word-break : normal !important;
 		padding-left:14em !important;
