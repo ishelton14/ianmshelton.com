@@ -58,11 +58,14 @@
 	   font-size:30px;
 	   color: #e5e5e5;
 	  }
+	  h1 {
+		  text-align: left !important;	
+	  }
 	  a:hover {
 	   font-size:30px;
 	   color: #e5e5e5;
 	   text-decoration:none;
-	  }	  
+	  }
 	div#banner { 
 	   position: absolute; 
 	   top: 0; 
