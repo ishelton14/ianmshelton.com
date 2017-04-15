@@ -41,6 +41,11 @@
 		padding-left:1em;
 		padding-right:1em;
       }
+	  img {
+		  /* width: 100% !important; */
+		  /* mix-blend-mode: multiply; */
+		  /* height: 100% !important; */
+	  }
 	  .key_word {
         background-color: #ededed !important;
 		background: url('') no-repeat center center;
