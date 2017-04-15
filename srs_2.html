@@ -5,87 +5,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Section 2: Inner Join Operations - Deriving from the Cartesian Product</title>
+    <title>Section 1: Join Concepts</title>
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,300,700" type="text/css">
-    <link rel="stylesheet" href="static/app.css" type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,300,700" type="text/css"> 
+    <link rel="stylesheet" href="srs.css" type="text/css">
     <meta name="theme-color" content="#111111">
-    <style type="text/css">
-      body {
-        background-color: #ededed !important;
-        background-size: cover;
-		color: #111 !important;
-		font-size: 13px !important;
-		font-family: Arial, Helvetica, sans-serif;
-		text-align: justify !important;
-      }  
-	  pre {
-        background-color: #ededed !important;
-        background-size: cover;
-		border-style: none;
-		color: #111 !important;
-		font-size: 15px !important;
-		font-family: Arial, Helvetica, sans-serif;
-		text-align: justify !important;	 
-		white-space: pre-wrap !important;
-		word-wrap:break-word !important;
-		border-collapse: collapse !important;
-		word-break : normal !important;
-		padding-left:14em !important;
-		padding-right:14em !important;
-	  }
-	  code {
-        background-color: #ededed !important;
-		background: url('') no-repeat center center;
-        background-size: cover;
-		color: #111;
-		font-size: 13px !important;
-		font-family: monospace;
-		text-align: justify !important;	 
-		white-space: pre-wrap !important;
-		word-wrap:break-word !important;  		
-	  }	    
-      header {
-        background-color: #ededed !important;
-		color: #111 !important;
-		font-size: 15px !important;
-		font-weight: bold
-		text-align: justify !important;
-		padding-left:14em;
-		padding-right:10em;
-      }
-	  .key_word {
-        background-color: #ededed !important;
-		background: url('') no-repeat center center;
-        background-size: cover;
-		color: #111;
-		font-size: 15px !important;
-		font-family: monospace;
-		text-align: justify !important;	 
-		white-space: pre-wrap !important;
-		word-wrap:break-word !important;
-		border-collapse: collapse !important;
-		word-break : normal !important; 	  
-	  }
-	  a {
-	   font-size:30px;
-	   color: #e5e5e5;
-	  }
-	div#banner { 
-	   position: absolute; 
-	   top: 0; 
-	   left: 0; 
-	   background-color: #111;
-	   color: #e5e5e5;	   
-	   width: 100%;
-	   text-align: left
-	   margin: 0 auto; 
-	   padding: 14px; 
-	   border: 1px solid #000;
-	   font-size:25px;
-	   position: fixed; 
-	 }
-    </style>
   </head>
   <body>
     <header>
@@ -98,6 +22,7 @@
 		<pre>
 In this exercise, I will be using two tables that have the same fields: Date, Item Number, Store Number, and Sales. The primary key of these tables is the composite key of Date, Item Number, and Store Number. For this example, assume the first table is a Production table and the second table is a QA table. As a Business Intelligence Analyst, this is a common exercise we undergo when making changes to various tables (for example, if the source system changes, joining the Production and QA tables ensures that the tables match record by record). The SQL query to create the two tables and populate them with data used in the examples that follow is shown below:
 		<code class="prettyprint">
+#run only once		
 create database test;
 
 drop table if exists test.prod;
