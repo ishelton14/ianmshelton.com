@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>SQL: Self Join Proof</title>
+    <title>SQL: Self Join Derivation</title>
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,300,700" type="text/css"> 
     <link rel="stylesheet" media='screen and (min-width: 900px)' href="srs.css" type="text/css">
@@ -17,10 +17,10 @@
 		<a href = 'blog.html'>Blog - Ian Shelton</a>
 	  </div>
 	<br><br><br>
-	  <h1 style = "font-size:22px; font-weight: bold">SQL: Self Join Proof</h1>
+	  <h1 style = "font-size:22px; font-weight: bold">SQL: Self Join Derivation</h1>
 	</header>	
   <pre>
-In this excersie, I will go over how to prove the number of rows returned by self joins. The example will show that you can determine how many rows will be returned by a self join based on the number of self joins and the numbers of values of x present in y.   
+In this excersie, I will explain how to determine the number of records returned by self joins. A self join is when a table is joined to itself. The examples will demonstrate that you can determine how many records will be returned by a self join based on the number of self joins and the number of times a value x appears in column y.   
   <code class="prettyprint">
 #run only once		
 create database test;
@@ -29,7 +29,7 @@ drop table if exists test.courses;
 
 create table test.courses (
 student_id integer
-,course_id  integer
+,course_id integer
 )
 ;
 
@@ -41,54 +41,59 @@ insert into test.courses (student_id, course_id) values
 ,(3, 2) 
 ,(3, 3)
 ;
-</code> 
-  Proof of self joins 
+</code>
 
-let x = value in column y
-let x.row_count = # rows of value x in column y
-let j = # of self joins to column y
+The resulting table is shown below:
 
-general formula: 
+<img src="self_join.png" alt="img"/> 
 
-# rows returned = (x1.row_count)^j + (x2.row_count)^j + ... + (xn.row_count)^j
+For the below excersise, please assume the following:
 
-If all values of x are unique: 
+1) let y = the column to which you self join
+2) let xi = a value in column y (For example, "1" is a value in the "student_id" column). Assume that the number of possible i values represents the number of unique values that appears in column y
+3) let xi.count = number of times value x appears in column y (For example, the value "1" appears 3 times in the "student_id" column and the value "2" appears 1 time in the "student_id" column)
+4) let j = number of self joins to column y
 
-# rows returned = (x1.row_count) + (x2.row_count) + ... + (xn.row_count)
-
-Examples: 
+Given these parameters, the general formula for determining the number of rows returned is the following:
+<code style="color: #000099;">
+number of rows returned = (x1.count) ^ (j+1) + (x2.count) ^ (j+1) + ... + (xn.count) ^ (j+1)
+</code>
+If all values of x are unique (do NOT appears more than once), then the number of rows returned is the following: 
+<code style="color: #000099;">
+number of rows returned = (x1.count) + (x2.count) + ... + (xn.count)
+</code>
+In the examples below, I will show queries with 1,2,3, and 4 self joins. In each case, the formulas above for determining the number of records returned hold true: 
   <code class="prettyprint">
-# returns 14 rows (3^2 + 1^2 +2^2)
+# 1 self join: returns 14 rows (3^2 + 1^2 + 2^2)
 select c1.student_id, c2.student_id
-from course as c1, course as c2
+from test.courses as c1, test.courses as c2
 where c1.student_id=c2.student_id
 ;
 
-# returns 36 rows (3^3 + 1^3 +2^3)
+# 2 self joins: returns 36 rows (3^3 + 1^3 + 2^3)
 select c1.student_id, c2.student_id, c3.student_id
-from course as c1, course as c2, course as c3
+from test.courses as c1, test.courses as c2, test.courses as c3
 where c1.student_id=c2.student_id
 and c2.student_id=c3.student_id
 ;
 
-# returns 98 rows (3^4 + 1^4 +2^4)
+# 3 self joins: returns 98 rows (3^4 + 1^4 + 2^4)
 select c1.student_id, c2.student_id, c3.student_id, c4.student_id
-from course as c1, course as c2, course as c3, course as c4
+from test.courses as c1, test.courses as c2, test.courses as c3, test.courses as c4
 where c1.student_id=c2.student_id
 and c2.student_id=c3.student_id
 and c3.student_id=c4.student_id
 ;
 
-# returns 216 rows (3^5 + 1^5 +2^5)
+# 4 self joins: returns 276 rows (3^5 + 1^5 + 2^5)
 select c1.student_id, c2.student_id, c3.student_id, c4.student_id, c5.student_id
-from course as c1, course as c2, course as c3, course as c4, course as c5
+from test.courses as c1, test.courses as c2, test.courses as c3, test.courses as c4, test.courses as c5
 where c1.student_id=c2.student_id
 and c2.student_id=c3.student_id
 and c3.student_id=c4.student_id
 and c4.student_id=c5.student_id
 ;
 	</code>
-
   </pre>
   		<script type="text/javascript" src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js">		
 		</script>
